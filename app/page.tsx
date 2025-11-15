@@ -5,37 +5,49 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-rose-50 via-amber-50 to-sky-50 flex items-center justify-center px-4 py-10">
       <div className="max-w-3xl w-full">
-        <div className="mb-8 text-center">
-          <p className="text-sm tracking-[0.3em] uppercase text-rose-400">
-            The Wedding of
+        {/* Heading */}
+        <div className="mb-8 text-center space-y-3">
+          <p className="text-xs tracking-[0.3em] uppercase text-rose-400">
+            In the name of Allah, the Most Gracious, the Most Merciful
           </p>
-          <h1 className="mt-3 text-4xl md:text-5xl font-semibold text-slate-800">
+          <h1 className="mt-1 text-4xl md:text-5xl font-semibold text-slate-800">
             Imaan <span className="text-rose-400">&amp;</span> Groom
           </h1>
         </div>
 
         <div className="grid gap-8 md:grid-cols-[2fr,1.3fr] items-stretch">
-          {/* Main card */}
+          {/* Main invite card */}
           <section className="relative overflow-hidden rounded-3xl bg-white/80 shadow-md border border-rose-100/70 p-7 md:p-9 backdrop-blur">
-            {/* Decorative “floral” corners using gradients */}
+            {/* Decorative “floral” blobs */}
             <div className="pointer-events-none absolute -top-10 -left-10 h-32 w-32 rounded-full bg-rose-100 opacity-60 blur-2xl" />
             <div className="pointer-events-none absolute -bottom-16 -right-10 h-40 w-40 rounded-full bg-emerald-100 opacity-70 blur-3xl" />
 
             <div className="relative space-y-6 text-slate-700">
               <p className="text-sm font-medium tracking-wide text-rose-400 uppercase">
-                You are warmly invited
+                Nikah &amp; Wedding Reception
               </p>
 
               <p className="text-lg">
-                With the blessing of Allah and their families, <br></br>
-                Imaan &amp; Groom
-                warmly invite you to join them in celebrating their Nikah ceremony
-                followed by a wedding reception.
+                With the blessings of Allah ﷻ and their families, Imaan &amp; Groom
+                warmly invite you to join them in celebrating their Nikah
+                ceremony followed by a wedding reception.
               </p>
 
+              {/* Qur'an ayah */}
+              <div className="border-l-2 border-rose-100 pl-4 italic text-sm text-slate-600">
+                “He created for you spouses from among yourselves so that you may
+                find peace and comfort in each other…”
+                <br />
+                <span className="not-italic text-xs text-slate-500">
+                  (Ar-Rum 30:21)
+                </span>
+              </div>
+
               <div className="space-y-2 text-sm md:text-base">
-                <p className="font-medium text-slate-900">Sunday, 7 December 2025</p>
-                <p>Arrival from 2:00pm • Ceremony at 3:00pm</p>
+                <p className="font-medium text-slate-900">
+                  Sunday, 7 December 2025
+                </p>
+                <p>Arrival from 2:00pm • Nikah at 3:00pm, Insha&apos;Allah</p>
                 <p className="mt-3 font-medium text-slate-900">
                   VENUENAME
                 </p>
@@ -43,7 +55,8 @@ export default function Home() {
               </div>
 
               <p className="pt-2 text-sm text-slate-500">
-                Reception, dinner and dancing to follow.
+                Your presence and du&apos;ās would mean so much to the couple as
+                they begin this blessed journey together.
               </p>
 
               <div className="pt-4">
@@ -65,26 +78,29 @@ export default function Home() {
               </h2>
               <div>
                 <p className="font-medium text-slate-900">Dress code</p>
-                <p>Soft pastels &amp; garden party chic.</p>
+                <p>Modest, elegant attire in soft pastels.</p>
               </div>
               <div>
-                <p className="font-medium text-slate-900">Gifts</p>
+                <p className="font-medium text-slate-900">Occasion</p>
                 <p>
-                  Your presence is the greatest gift. We kindly request no
-                  boxed gifts.
+                  Nikah ceremony followed by a reception with family and
+                  friends, Insha&apos;Allah.
                 </p>
               </div>
               <div>
                 <p className="font-medium text-slate-900">RSVP</p>
                 <p>
-                  Please let us know if you&apos;ll be joining us by{" "}
-                  <span className="font-semibold text-rose-500">29 November 2025</span>.
+                  Kindly confirm your attendance by{" "}
+                  <span className="font-semibold text-rose-500">
+                    1 November 2025
+                  </span>
+                  , so arrangements can be made with ease.
                 </p>
               </div>
             </div>
 
             <p className="mt-6 text-[11px] text-slate-400 text-right">
-              Imaan &amp; Groom • 12.07.26
+              Imaan &amp; Groom • 07.12.25 • Nikah
             </p>
           </aside>
         </div>
