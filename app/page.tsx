@@ -27,12 +27,14 @@ export default function Home() {
               </p>
 
               <p className="text-lg">
-                Please join us as we celebrate the beginning of our next
-                chapter together.
+                With the blessing of Allah and their families, <br></br>
+                Imaan &amp; Groom
+                warmly invite you to join them in celebrating their Nikah ceremony
+                followed by a wedding reception.
               </p>
 
               <div className="space-y-2 text-sm md:text-base">
-                <p className="font-medium text-slate-900">Sunday, 12 July 2026</p>
+                <p className="font-medium text-slate-900">Sunday, 7 December 2025</p>
                 <p>Arrival from 2:00pm • Ceremony at 3:00pm</p>
                 <p className="mt-3 font-medium text-slate-900">
                   VENUENAME
@@ -76,7 +78,7 @@ export default function Home() {
                 <p className="font-medium text-slate-900">RSVP</p>
                 <p>
                   Please let us know if you&apos;ll be joining us by{" "}
-                  <span className="font-semibold text-rose-500">1 May 2026</span>.
+                  <span className="font-semibold text-rose-500">29 November 2025</span>.
                 </p>
               </div>
             </div>
