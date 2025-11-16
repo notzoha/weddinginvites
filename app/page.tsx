@@ -28,7 +28,7 @@ export default function Home() {
               </p>
 
               <p className="text-lg">
-                With the blessings of Allah ﷻ and their families, Iman &amp; Ibraheam
+                With the blessings of Allah ﷻ and their families, Dr Iman Mustafa &amp; Dr Ibraheam Nabi
                 warmly invite you to join them in celebrating their Nikah
                 ceremony followed by a wedding reception.
               </p>
