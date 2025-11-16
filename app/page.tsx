@@ -11,7 +11,7 @@ export default function Home() {
             In the name of Allah, the Most Gracious, the Most Merciful
           </p>
           <h1 className="mt-1 text-4xl md:text-5xl font-semibold text-slate-800">
-            Imaan <span className="text-rose-400">&amp;</span> Groom
+            Iman <span className="text-rose-400">&amp;</span> Ibraheam
           </h1>
         </div>
 
@@ -28,7 +28,7 @@ export default function Home() {
               </p>
 
               <p className="text-lg">
-                With the blessings of Allah ﷻ and their families, Imaan &amp; Groom
+                With the blessings of Allah ﷻ and their families, Iman &amp; Ibraheam
                 warmly invite you to join them in celebrating their Nikah
                 ceremony followed by a wedding reception.
               </p>
@@ -64,7 +64,7 @@ export default function Home() {
                   href="/rsvp"
                   className="inline-flex items-center justify-center rounded-full border border-rose-300 bg-rose-100/80 px-6 py-2.5 text-sm font-medium text-rose-900 shadow-sm transition hover:bg-rose-200"
                 >
-                  RSVP to Imaan &amp; Groom&apos;s wedding
+                  RSVP to Iman &amp; Ibraheam&apos;s wedding
                 </Link>
               </div>
             </div>
@@ -100,7 +100,7 @@ export default function Home() {
             </div>
 
             <p className="mt-6 text-[11px] text-slate-400 text-right">
-              Imaan &amp; Groom • 07.12.25 • Nikah
+              Iman &amp; Ibraheam • 07.12.25 • Nikah
             </p>
           </aside>
         </div>
