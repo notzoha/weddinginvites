@@ -37,6 +37,59 @@ export default function RsvpPage() {
     });
   }
 
+  function makeDtStamp() {
+    const d = new Date();
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    const yyyy = d.getUTCFullYear();
+    const mm = pad(d.getUTCMonth() + 1);
+    const dd = pad(d.getUTCDate());
+    const hh = pad(d.getUTCHours());
+    const mi = pad(d.getUTCMinutes());
+    const ss = pad(d.getUTCSeconds());
+    return `${yyyy}${mm}${dd}T${hh}${mi}${ss}Z`;
+  }
+
+  function handleDownloadIcs() {
+    const dtstamp = makeDtStamp();
+    const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Iman&Ibrahaem//Wedding//EN
+BEGIN:VEVENT
+UID:${dtstamp}-iman-ibrahaem-wedding@rsvp
+DTSTAMP:${dtstamp}
+DTSTART:20251207T140000Z
+DTEND:20251207T190000Z
+SUMMARY:Iman & Ibrahaem Nikah & Wedding Reception
+LOCATION:VENUENAME, Peterborough
+DESCRIPTION:Iman & Ibrahaem's Nikah ceremony and wedding reception.
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "iman-ibrahaem-wedding.ics";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function handleOpenGoogleCalendar() {
+    const base = "https://www.google.com/calendar/render";
+    const params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: "Iman & Ibrahaem Nikah & Wedding Reception",
+      dates: "20251207T140000Z/20251207T190000Z",
+      location: "VENUENAME, Peterborough",
+      details:
+        "Nikah ceremony followed by a wedding reception, Insha'Allah.",
+    });
+    const url = `${base}?${params.toString()}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setIsSubmitting(true);
@@ -68,45 +121,154 @@ export default function RsvpPage() {
     }
   }
 
+  // shared flag used in *both* success screen and form
   const showGuestDetails = attending === "yes" || attending === "maybe";
 
-  // ✅ Thank-you screen varies based on attending
+  // ✅ Thank-you + summary screen
   if (status === "success") {
     const notAttending = attending === "no";
 
     return (
       <main className="min-h-screen bg-gradient-to-b from-rose-50 via-amber-50 to-sky-50 flex items-center justify-center px-4 py-10">
-        <div className="max-w-md w-full rounded-3xl bg-white/90 border border-emerald-100 shadow-md p-8 text-center space-y-4">
-          <h1 className="text-2xl font-semibold text-slate-800">
-            JazakAllahu khayran ✨
-          </h1>
+        <div className="max-w-2xl w-full space-y-6">
+          {/* Thank you card */}
+          <div className="rounded-3xl bg-white/90 border border-emerald-100 shadow-md p-7 text-center space-y-3">
+            <h1 className="text-2xl font-semibold text-slate-800">
+              JazakAllahu khayran ✨
+            </h1>
 
-          {notAttending ? (
-            <>
-              <p className="text-sm text-slate-600">
-                Thank you for letting us know you won&apos;t be able to attend.
-              </p>
-              <p className="text-sm text-slate-600">
-                Iman &amp; Ibrahaem truly appreciate your response and your
-                du&apos;ās. You will be dearly missed on the day, Insha&apos;Allah.
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="text-sm text-slate-600">
-                Your party&apos;s RSVP has been received.
-              </p>
-              <p className="text-sm text-slate-600">
-                Iman &amp; Ibrahaem are grateful for your du&apos;ās and look
-                forward to celebrating with you, Insha&apos;Allah.
-              </p>
-            </>
-          )}
+            {notAttending ? (
+              <>
+                <p className="text-sm text-slate-600">
+                  Thank you for letting us know you won&apos;t be able to
+                  attend.
+                </p>
+                <p className="text-sm text-slate-600">
+                  Iman &amp; Ibrahaem truly appreciate your response and your
+                  du&apos;ās. You will be dearly missed on the day,
+                  Insha&apos;Allah.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-slate-600">
+                  Your party&apos;s RSVP has been received.
+                </p>
+                <p className="text-sm text-slate-600">
+                  Iman &amp; Ibrahaem are grateful for your du&apos;ās and look
+                  forward to celebrating with you, Insha&apos;Allah.
+                </p>
+              </>
+            )}
+          </div>
+
+          {/* Wedding + RSVP summary */}
+          <div className="rounded-3xl bg-white/90 border border-rose-100 shadow-md p-7 space-y-5">
+            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-3">
+              <div>
+                <p className="text-xs tracking-[0.3em] uppercase text-rose-400">
+                  Event Details
+                </p>
+                <h2 className="mt-1 text-xl font-semibold text-slate-800">
+                  Iman &amp; Ibrahaem&apos;s Nikah
+                </h2>
+              </div>
+              {!notAttending && (
+                <div className="flex flex-wrap gap-2 text-xs text-slate-500 md:text-right">
+                  <span className="inline-flex items-center rounded-full border border-rose-100 bg-rose-50 px-3 py-1">
+                    📸 Please screenshot or save these details
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
+              <div className="space-y-1">
+                <p className="font-medium text-slate-900">Date &amp; time</p>
+                <p>Sunday, 7 December 2025</p>
+                <p>Arrival from 2:00pm • Nikah at 3:00pm, Insha&apos;Allah</p>
+              </div>
+              <div className="space-y-1">
+                <p className="font-medium text-slate-900">Location</p>
+                <p>VENUENAME</p>
+                <p>Peterborough, United Kingdom</p>
+              </div>
+            </div>
+
+            <div className="border-t border-rose-50 pt-4 grid gap-4 md:grid-cols-2 text-sm text-slate-700">
+              <div className="space-y-1">
+                <p className="font-medium text-slate-900">Your RSVP</p>
+                <p>Party / family: {partyName || "—"}</p>
+                <p>
+                  Attendance:{" "}
+                  {attending === "yes"
+                    ? "Attending, Insha'Allah"
+                    : attending === "maybe"
+                    ? "Maybe / not sure yet"
+                    : "Not attending"}
+                </p>
+                {!notAttending && <p>Number of guests: {guestCount}</p>}
+              </div>
+
+              {!notAttending && (
+                <div className="space-y-1">
+                  <p className="font-medium text-slate-900">Guest names</p>
+                  {guestNames.map((name, idx) => (
+                    <p key={idx}>{name || `Guest ${idx + 1}`}</p>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {!notAttending && (
+              <>
+                {(dietary || notes) && (
+                  <div className="border-t border-rose-50 pt-4 grid gap-4 md:grid-cols-2 text-sm text-slate-700">
+                    {dietary && (
+                      <div className="space-y-1">
+                        <p className="font-medium text-slate-900">
+                          Dietary notes
+                        </p>
+                        <p>{dietary}</p>
+                      </div>
+                    )}
+                    {notes && (
+                      <div className="space-y-1">
+                        <p className="font-medium text-slate-900">
+                          Message for the couple
+                        </p>
+                        <p>{notes}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Calendar actions */}
+                <div className="border-t border-rose-50 pt-4 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={handleOpenGoogleCalendar}
+                    className="inline-flex items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-medium text-emerald-900 shadow-sm hover:bg-emerald-100"
+                  >
+                    Add to Google Calendar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleDownloadIcs}
+                    className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-medium text-slate-800 shadow-sm hover:bg-slate-100"
+                  >
+                    Download .ics calendar file
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </main>
     );
   }
 
+  // ✅ Main form view
   return (
     <main className="min-h-screen bg-gradient-to-b from-rose-50 via-amber-50 to-sky-50 flex items-center justify-center px-4 py-10">
       <div className="max-w-2xl w-full">

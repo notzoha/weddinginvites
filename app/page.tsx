@@ -92,7 +92,7 @@ export default function Home() {
                 <p>
                   Kindly confirm your attendance by{" "}
                   <span className="font-semibold text-rose-500">
-                    1 November 2025
+                    23 November 2025
                   </span>
                   , so arrangements can be made with ease.
                 </p>
